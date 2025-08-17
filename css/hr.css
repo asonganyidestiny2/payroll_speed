@@ -1,0 +1,82 @@
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f6f8;
+        color: #333;
+    }
+ header { 
+    background: #004080; 
+    color: white; 
+    padding: 22px; 
+    text-align: center; 
+}
+
+    header h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+  nav {
+    position: relative;
+    left: 0;
+    z-index: 1000;
+    height: 28rem;
+    width: 20rem; 
+    margin-top: 2px;
+    background: #0073e6; 
+    padding-top: 5px;
+    padding-left: 7px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+  nav a { 
+    color: #fff; 
+    padding: 1rem; 
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    text-decoration: none; 
+    border-radius: 10px;
+    font-weight: bold; 
+    width: 18rem;
+    transition: background 0.3s, color 0.3s ease-in-out;
+}
+  nav a:hover { 
+    background: #fff;
+    color: black;
+}
+    header form button {
+         float: right; 
+    background: #cc0000; 
+    color: white; 
+    border: none; 
+    padding: 8px 16px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+  header form button:hover { 
+    background: #990000; 
+    }
+    main { 
+    padding: 20px; 
+    /* width: 45rem; */
+    position: absolute;
+    top: 3rem;
+}
+@media (min-width: 700px){
+  main { 
+    padding: 20px; 
+    width: 45rem;
+    position: absolute;
+    left: 25rem;
+}
+
+}
+footer {
+    background: #004aad;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 2px;
+    position: relative;
+    z-index: 1000;
+}

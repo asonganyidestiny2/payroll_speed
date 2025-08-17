@@ -1,0 +1,73 @@
+.main-header {
+    background: #004aad;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+}
+.main-header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.main-header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.btn-login {
+    background: orange;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+        body {
+             max-width: 600px; 
+             margin: 40px auto; 
+             font-family: Arial, sans-serif; 
+            }
+        h2 { 
+            color: #660066; 
+            text-align: center; 
+        }
+        form { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
+        }
+        label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: bold; 
+        }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            border-radius: 6px; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box; 
+        }
+        button { 
+            background: #660066; 
+            color: white; 
+            padding: 12px; 
+            border: none; 
+            margin-top: 20px; 
+            font-size: 18px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+        }
+        button:hover { 
+            background: #4b004b; 
+        }
+        .message { 
+            text-align: center; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            color: green; 
+        }

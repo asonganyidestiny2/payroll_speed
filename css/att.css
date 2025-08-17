@@ -1,0 +1,86 @@
+.main-header {
+    background: #004aad;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+}
+.main-header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.main-header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.btn-login {
+    background: orange;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #660066;
+            margin-bottom: 20px;
+        }
+        .message {
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+            padding: 10px;
+            max-width: 600px;
+            margin: 15px auto;
+            text-align: center;
+            font-weight: bold;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #660066;
+            color: white;
+        }
+        select {
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background: #660066;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #4b004b;
+        }

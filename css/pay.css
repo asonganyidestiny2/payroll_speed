@@ -1,0 +1,69 @@
+.main-header {
+    background: #004aad;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+}
+.main-header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.main-header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.btn-login {
+    background: orange;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 10px;
+            background: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #660066;
+        }
+        .info, .salary-details {
+            margin-bottom: 20px;
+        }
+        .info div, .salary-details div {
+            margin: 5px 0;
+        }
+        .label {
+            font-weight: bold;
+            width: 150px;
+            display: inline-block;
+        }
+        .net-salary {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660066;
+            margin-top: 20px;
+            text-align: center;
+        }
+        button.print-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            background: #660066;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button.print-btn:hover {
+            background: #4b004b;
+        }
