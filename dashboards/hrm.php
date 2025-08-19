@@ -30,119 +30,13 @@ try {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HRM Dashboard - SpeedNet Payroll</title>
+<link rel="stylesheet" href="../css/hr.css">
 
 <!-- Icons -->
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
 
 <!-- Styling -->
-<style>
-    body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        background: #f4f6f9;
-        color: #333;
-    }
 
-    header {
-        background: #2c3e50;
-        color: white;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    header h1 {
-        margin: 0;
-        font-size: 1.3rem;
-    }
-
-    .logout-btn {
-        background: #e74c3c;
-        border: none;
-        padding: 8px 15px;
-        color: white;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: 0.3s;
-    }
-    .logout-btn:hover {
-        background: #c0392b;
-    }
-
-    nav {
-        display: flex;
-        background: #34495e;
-        padding: 10px;
-        flex-wrap: wrap;
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        padding: 10px 15px;
-        margin: 5px;
-        border-radius: 5px;
-        background: #3b4b61;
-        transition: 0.3s;
-    }
-
-    nav a i {
-        margin-left: 5px;
-    }
-
-    nav a:hover {
-        background: #1abc9c;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    .container h2 {
-        margin-bottom: 20px;
-        color: #2c3e50;
-    }
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-    }
-
-    .card {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card h3 {
-        margin-bottom: 10px;
-        color: #34495e;
-    }
-
-    .card p {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #1abc9c;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
-    }
-
-    footer {
-        background: #2c3e50;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        margin-top: 20px;
-    }
-</style>
 </head>
 <body>
 

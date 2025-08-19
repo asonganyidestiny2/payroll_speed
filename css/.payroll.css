@@ -1,15 +1,40 @@
 body{
      font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #004aad, #00bfff);
+    background: #1e1e2d;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+.main-header {
+    background: #2c2c3c;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+}
+.main-header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.main-header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.btn-login {
+    background: orange;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
 form{
-    width: 20rem;
-    height: 12rem;
+    width: 35rem;
+    height: 16rem;
     padding: 5px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -17,13 +42,15 @@ form{
 
 input{
     width: 70%;
-    height: 30px;
+    height: 40px;
     display: block;
+    margin-left: 3rem;
 }
 select{
     width: 70%;
-    height: 30px;
+    height: 40px;
     display: block;
+    margin-left: 3rem;
 }
     .status-badge {
             display: inline-block;

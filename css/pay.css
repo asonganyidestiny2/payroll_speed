@@ -1,5 +1,5 @@
 .main-header {
-    background: #004aad;
+    background: #2c2c3c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -34,7 +34,7 @@
         }
         h2 {
             text-align: center;
-            color: #660066;
+            color: #2c2c3c;
         }
         .info, .salary-details {
             margin-bottom: 20px;
@@ -50,7 +50,7 @@
         .net-salary {
             font-size: 20px;
             font-weight: bold;
-            color: #660066;
+        color: #2c2c3c;
             margin-top: 20px;
             text-align: center;
         }
@@ -58,7 +58,7 @@
             display: block;
             margin: 30px auto 0;
             padding: 10px 25px;
-            background: #660066;
+        background: #2c2c3c;
             color: white;
             border: none;
             border-radius: 8px;

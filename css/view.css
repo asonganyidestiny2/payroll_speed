@@ -1,5 +1,5 @@
 .main-header {
-    background: #004aad;
+    background: #2c2c3c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -61,7 +61,7 @@
             text-align: left;
         }
         th {
-            background-color: #660066;
+           background: #2c2c3c;
             color: white;
         }
         tr:hover {
@@ -73,7 +73,7 @@
             padding: 30px;
         }
         a {
-            color: #660066;
+            color: #2c2c3c;
             text-decoration: none;
             font-weight: bold;
         }

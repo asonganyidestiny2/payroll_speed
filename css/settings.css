@@ -1,5 +1,8 @@
+body{
+    background: #1e1e2d;
+}
 .main-header {
-    background: #004aad;
+    background: #2c2c3c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -29,7 +32,7 @@
              font-family: Arial, sans-serif; 
             }
         h2 { 
-            color: #660066; 
+            color: #2c2c3c;
             text-align: center; 
         }
         form { 
@@ -52,7 +55,7 @@
             box-sizing: border-box; 
         }
         button { 
-            background: #660066; 
+            background: #2c2c3c;
             color: white; 
             padding: 12px; 
             border: none; 
@@ -63,7 +66,7 @@
             width: 100%; 
         }
         button:hover { 
-            background: #4b004b; 
+            opacity: 0.3;
         }
         .message { 
             text-align: center; 

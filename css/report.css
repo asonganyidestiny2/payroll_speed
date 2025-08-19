@@ -1,5 +1,8 @@
+body{
+    background: #1e1e2d;
+}
 .main-header {
-    background: #004aad;
+    background: #2c2c3c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -34,7 +37,7 @@ body {
         border-radius: 12px;
 }
     h2 {
-        color: #660066;
+        color: #2c2c3c;
         text-align: center;
 }
     table {
@@ -52,7 +55,7 @@ body {
         text-align: left;
 }
     th {
-        background-color: #660066;
+        background: #2c2c3c;
         color: white;
 }
     tbody tr:hover {
