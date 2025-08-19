@@ -40,11 +40,13 @@ if (isset($_POST['add_employee'])) {
 <body>
     <header class="main-header">
         <div class="logo"><img src="image1_edited.png" alt=""></div>
+        <header class="main-header">
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
         <nav>
-            <?php
-            include '../module/components/nav.php';
-            ?>
-            <a href="../login.php" class="btn-login">BACK</a>
+            <a href="../login.php" class="btn-login">Back</a>
         </nav>
     </header>
     <div class="container">

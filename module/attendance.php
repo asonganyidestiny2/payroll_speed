@@ -42,58 +42,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['attendance'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Mark Attendance - SpeedNet Payroll</title>
     <link rel="stylesheet" href="../css/att.css">
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
+    </header>
 
-<h2>Mark Attendance for <?= date('F j, Y', strtotime($today)) ?></h2>
+    <h2>Mark Attendance for <?= date('F j, Y', strtotime($today)) ?></h2>
 
-<?php if ($message): ?>
-    <div class="message"><?= htmlspecialchars($message) ?></div>
-<?php endif; ?>
+    <?php if ($message): ?>
+        <div class="message"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
 
-<form method="POST" action="">
-    <table>
-        <thead>
-            <tr>
-                <th>Employee</th>
-                <th>Attendance Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($employees as $emp): ?>
-                <?php
-                // Check if attendance already recorded for employee today
-                $stmt2 = $pdo->prepare("SELECT status FROM attendance WHERE employee_id = ? AND date = ?");
-                $stmt2->execute([$emp['id'], $today]);
-                $record = $stmt2->fetch();
-                $currentStatus = $record ? $record['status'] : 'present';
-                ?>
+    <form method="POST" action="">
+        <table>
+            <thead>
                 <tr>
-                    <td><?= htmlspecialchars($emp['full_name']) ?></td>
-                    <td>
-                        <select name="attendance[<?= $emp['id'] ?>]">
-                            <option value="present" <?= $currentStatus === 'present' ? 'selected' : '' ?>>Present</option>
-                            <option value="absent" <?= $currentStatus === 'absent' ? 'selected' : '' ?>>Absent</option>
-                            <option value="leave" <?= $currentStatus === 'leave' ? 'selected' : '' ?>>Leave</option>
-                        </select>
-                    </td>
+                    <th>Employee</th>
+                    <th>Attendance Status</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <button type="submit">Save Attendance</button>
-</form>
+            </thead>
+            <tbody>
+                <?php foreach ($employees as $emp): ?>
+                    <?php
+                    // Check if attendance already recorded for employee today
+                    $stmt2 = $pdo->prepare("SELECT status FROM attendance WHERE employee_id = ? AND date = ?");
+                    $stmt2->execute([$emp['id'], $today]);
+                    $record = $stmt2->fetch();
+                    $currentStatus = $record ? $record['status'] : 'present';
+                    ?>
+                    <tr>
+                        <td><?= htmlspecialchars($emp['full_name']) ?></td>
+                        <td>
+                            <select name="attendance[<?= $emp['id'] ?>]">
+                                <option value="present" <?= $currentStatus === 'present' ? 'selected' : '' ?>>Present</option>
+                                <option value="absent" <?= $currentStatus === 'absent' ? 'selected' : '' ?>>Absent</option>
+                                <option value="leave" <?= $currentStatus === 'leave' ? 'selected' : '' ?>>Leave</option>
+                            </select>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <button type="submit">Save Attendance</button>
+    </form>
 
 </body>
+
 </html>

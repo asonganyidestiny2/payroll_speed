@@ -24,42 +24,46 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Records - SpeedNet Payroll</title>
-<link rel="stylesheet" href="../css/record.css">
+    <meta charset="UTF-8">
+    <title>Records - SpeedNet Payroll</title>
+    <link rel="stylesheet" href="../css/record.css">
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="../image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">Back</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
 
-<div class="container">
-    <h1>Company Records</h1>
+    <div class="container">
+        <h1>Company Records</h1>
 
-    <div class="grid">
-        <div class="card">
-            <div class="label">Total Employees</div>
-            <div class="value"><?php echo $employeesCount; ?></div>
-            <a href="../module/view_employee.php" class="link">View Employees</a>
-        </div>
-        <div class="card">
-            <div class="label">Attendance Records</div>
-            <div class="value"><?php echo $attendanceCount; ?></div>
-            <a href="../module/attendance_history.php" class="link">View Attendance</a>
-        </div>
-        <div class="card">
-            <div class="label">Payroll Records</div>
-            <div class="value"><?php echo $payrollCount; ?></div>
-            <a href="../module/payroll_history.php" class="link">View Payroll</a>
+        <div class="grid">
+            <div class="card">
+                <div class="label">Total Employees</div>
+                <div class="value"><?php echo $employeesCount; ?></div>
+                <a href="../module/view_employee.php" class="link">View Employees</a>
+            </div>
+            <div class="card">
+                <div class="label">Attendance Records</div>
+                <div class="value"><?php echo $attendanceCount; ?></div>
+                <a href="../module/attendance_history.php" class="link">View Attendance</a>
+            </div>
+            <div class="card">
+                <div class="label">Payroll Records</div>
+                <div class="value"><?php echo $payrollCount; ?></div>
+                <a href="../module/payroll_history.php" class="link">View Payroll</a>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>

@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
         $stmt = $pdo->prepare("SELECT * FROM payroll WHERE employee_id = ? AND pay_month = ?");
         $stmt->execute([$employee_id, $pay_month]);
         $existing_payroll = $stmt->fetch();
-        
+
         $payrollData['existing_payroll'] = $existing_payroll;
 
         // Save payroll to DB if "Save Payroll" button clicked
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
             if ($existing_payroll && $existing_payroll['payment_status'] === 'pending') {
                 $stmt = $pdo->prepare("UPDATE payroll SET payment_status = 'paid', payment_date = CURDATE() WHERE id = ?");
                 $result = $stmt->execute([$existing_payroll['id']]);
-                
+
                 if ($result) {
                     $message = "🎉 PAYROLL PROCESSED! Status changed from PENDING to PAID";
                     // Refresh payroll data to show updated status
@@ -152,17 +152,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Payroll Calculation - SpeedNet Payroll</title>
     <link rel="stylesheet" href="../css/.payroll.css">
-    
+
 </head>
+
 <body>
     <header class="main-header">
-        <div class="logo"><img src="../image1_edited.png" alt="SpeedNet Payroll"></div>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
         <nav>
-            <a href="../index.php">Home</a>
-            <a href="#features">Features</a>
             <a href="../login.php" class="btn-login">Back</a>
         </nav>
     </header>
@@ -199,7 +202,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
                     <span class="status-badge status-<?= $payrollData['existing_payroll']['payment_status'] ?>">
                         <?= ucfirst($payrollData['existing_payroll']['payment_status']) ?>
                         <?php if ($payrollData['existing_payroll']['payment_status'] === 'paid' && $payrollData['existing_payroll']['payment_date']): ?>
-                            <br><small style="font-size: 0.7em;">Paid: <?= date('M d, Y', strtotime($payrollData['existing_payroll']['payment_date'])) ?></small>
+                            <br><small style="font-size: 0.7em;">Paid:
+                                <?= date('M d, Y', strtotime($payrollData['existing_payroll']['payment_date'])) ?></small>
                         <?php endif; ?>
                     </span>
                 <?php else: ?>
@@ -208,41 +212,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
             </div>
 
             <h3>Payroll Summary</h3>
-            
+
             <div>
-                <strong>Employee:</strong> 
+                <strong>Employee:</strong>
                 <span><?= htmlspecialchars($payrollData['employee']['full_name']) ?></span>
             </div>
             <div>
-                <strong>Position:</strong> 
+                <strong>Position:</strong>
                 <span><?= htmlspecialchars($payrollData['employee']['position']) ?></span>
             </div>
             <div>
-                <strong>Month:</strong> 
-                <span><?= date('F Y', strtotime($payrollData['pay_month'].'-01')) ?></span>
+                <strong>Month:</strong>
+                <span><?= date('F Y', strtotime($payrollData['pay_month'] . '-01')) ?></span>
             </div>
             <div>
-                <strong>Salary Type:</strong> 
+                <strong>Salary Type:</strong>
                 <span><?= ucfirst($payrollData['employee']['salary_type']) ?></span>
             </div>
             <div>
-                <strong>Hours Worked:</strong> 
+                <strong>Hours Worked:</strong>
                 <span><?= htmlspecialchars($payrollData['hours_worked']) ?></span>
             </div>
             <div>
-                <strong>Base Salary:</strong> 
+                <strong>Base Salary:</strong>
                 <span>FCFA<?= number_format($payrollData['employee']['base_salary'], 2) ?></span>
             </div>
             <div>
-                <strong>Gross Salary:</strong> 
+                <strong>Gross Salary:</strong>
                 <span>FCFA<?= $payrollData['gross_salary'] ?></span>
             </div>
             <div>
-                <strong>Total Bonuses:</strong> 
+                <strong>Total Bonuses:</strong>
                 <span style="color: #28a745;">+FCFA<?= $payrollData['bonuses'] ?></span>
             </div>
             <div>
-                <strong>Total Deductions:</strong> 
+                <strong>Total Deductions:</strong>
                 <span style="color: #dc3545;">-FCFA<?= $payrollData['deductions'] ?></span>
             </div>
             <div style="font-size: 1.2em; margin-top: 15px; padding: 10px; background: #e9ecef; border-radius: 5px;">
@@ -251,12 +255,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
 
             <div class="button-group">
                 <?php if (!$payrollData['existing_payroll'] || $payrollData['existing_payroll']['payment_status'] === 'pending'): ?>
-                    
+
                     <!-- Save/Update Payroll Button -->
                     <form method="POST" action="" style="display: inline;">
                         <input type="hidden" name="employee_id" value="<?= htmlspecialchars($employee_id) ?>">
                         <input type="hidden" name="pay_month" value="<?= htmlspecialchars($pay_month) ?>">
-                        <button type="submit" name="save_payroll" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+                        <button type="submit" name="save_payroll"
+                            style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
                             <?= $payrollData['existing_payroll'] ? 'Update Payroll' : 'Save Payroll' ?>
                         </button>
                     </form>
@@ -266,8 +271,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
                         <form method="POST" action="" style="display: inline;">
                             <input type="hidden" name="employee_id" value="<?= htmlspecialchars($employee_id) ?>">
                             <input type="hidden" name="pay_month" value="<?= htmlspecialchars($pay_month) ?>">
-                            <button type="submit" name="run_payroll" class="run-payroll-btn" 
-                                    onclick="return confirm('This will mark the payroll as PAID and cannot be undone. Continue?')">
+                            <button type="submit" name="run_payroll" class="run-payroll-btn"
+                                onclick="return confirm('This will mark the payroll as PAID and cannot be undone. Continue?')">
                                 ▶️ RUN PAYROLL (Mark as Paid)
                             </button>
                         </form>
@@ -280,7 +285,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
                         <p style="margin: 5px 0; color: #155724;">
                             This payroll has been processed and marked as PAID.
                             <?php if ($payrollData['existing_payroll']['payment_date']): ?>
-                                <br>Payment processed on: <?= date('F d, Y', strtotime($payrollData['existing_payroll']['payment_date'])) ?>
+                                <br>Payment processed on:
+                                <?= date('F d, Y', strtotime($payrollData['existing_payroll']['payment_date'])) ?>
                             <?php endif; ?>
                         </p>
                     </div>
@@ -290,4 +296,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $employee_id) {
     <?php endif; ?>
 
 </body>
+
 </html>

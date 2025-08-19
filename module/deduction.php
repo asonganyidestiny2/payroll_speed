@@ -47,73 +47,77 @@ $deductions = $stmt->fetchAll();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Deductions - SpeedNet Payroll</title>
     <link rel="stylesheet" href="../css/deduct.css">
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
 
-<h2>Manage Deductions</h2>
+    <h2>Manage Deductions</h2>
 
-<?php if ($message): ?>
-    <p class="message"><?= htmlspecialchars($message) ?></p>
-<?php endif; ?>
+    <?php if ($message): ?>
+        <p class="message"><?= htmlspecialchars($message) ?></p>
+    <?php endif; ?>
 
-<form method="POST" action="">
-    <label for="employee_id">Select Employee</label>
-    <select name="employee_id" id="employee_id" required>
-        <option value="">-- Select Employee --</option>
-        <?php foreach ($employees as $emp): ?>
-            <option value="<?= $emp['id'] ?>"><?= htmlspecialchars($emp['full_name']) ?></option>
-        <?php endforeach; ?>
-    </select>
+    <form method="POST" action="">
+        <label for="employee_id">Select Employee</label>
+        <select name="employee_id" id="employee_id" required>
+            <option value="">-- Select Employee --</option>
+            <?php foreach ($employees as $emp): ?>
+                <option value="<?= $emp['id'] ?>"><?= htmlspecialchars($emp['full_name']) ?></option>
+            <?php endforeach; ?>
+        </select>
 
-    <label for="type">Deduction Type</label>
-    <input type="text" name="type" id="type" placeholder="e.g., Tax, Loan" required>
+        <label for="type">Deduction Type</label>
+        <input type="text" name="type" id="type" placeholder="e.g., Tax, Loan" required>
 
-    <label for="amount">Amount</label>
-    <input type="number" step="0.01" min="0" name="amount" id="amount" placeholder="0.00" required>
+        <label for="amount">Amount</label>
+        <input type="number" step="0.01" min="0" name="amount" id="amount" placeholder="0.00" required>
 
-    <label for="deduction_date">Deduction Date</label>
-    <input type="date" name="deduction_date" id="deduction_date" value="<?= date('Y-m-d') ?>" required>
+        <label for="deduction_date">Deduction Date</label>
+        <input type="date" name="deduction_date" id="deduction_date" value="<?= date('Y-m-d') ?>" required>
 
-    <button type="submit" name="add_deduction">Add Deduction</button>
-</form>
+        <button type="submit" name="add_deduction">Add Deduction</button>
+    </form>
 
-<h3>Recent Deductions</h3>
+    <h3>Recent Deductions</h3>
 
-<?php if (count($deductions) === 0): ?>
-    <p class="no-records">No deductions recorded yet.</p>
-<?php else: ?>
-<table>
-    <thead>
-        <tr>
-            <th>Employee</th>
-            <th>Deduction Type</th>
-            <th>Amount</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($deductions as $deduction): ?>
-            <tr>
-                <td><?= htmlspecialchars($deduction['full_name']) ?></td>
-                <td><?= htmlspecialchars($deduction['type']) ?></td>
-                <td>$<?= number_format($deduction['amount'], 2) ?></td>
-                <td><?= htmlspecialchars($deduction['deduction_date']) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<?php endif; ?>
+    <?php if (count($deductions) === 0): ?>
+        <p class="no-records">No deductions recorded yet.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Deduction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($deductions as $deduction): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($deduction['full_name']) ?></td>
+                        <td><?= htmlspecialchars($deduction['type']) ?></td>
+                        <td>$<?= number_format($deduction['amount'], 2) ?></td>
+                        <td><?= htmlspecialchars($deduction['deduction_date']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
 
 </body>
+
 </html>

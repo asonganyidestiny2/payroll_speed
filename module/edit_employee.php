@@ -56,13 +56,14 @@ if (isset($_POST['update_employee'])) {
 </head>
 <body>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
     <div class="container">
         <h2>Edit Employee</h2>
         <?php if ($message): ?>

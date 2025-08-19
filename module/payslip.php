@@ -25,34 +25,58 @@ if (!$payslip) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="login.php" class="btn-login">LOGIN</a>
-    </nav>
-</header>
+        <div class="logo"><img src="image1_edited.png" alt=""></div>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="#features">Features</a>
+            <a href="login.php" class="btn-login">LOGIN</a>
+        </nav>
+    </header>
     <title>Payslip - <?= htmlspecialchars($payslip['full_name']) ?></title>
     <link rel="stylesheet" href="../module/payslip.php">
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .payslip { border: 1px solid #ccc; padding: 20px; width: 400px; }
-        h2 { text-align: center; }
-        .row { display: flex; justify-content: space-between; margin: 8px 0; }
-        .btn-print { display: block; text-align: center; margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .payslip {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+
+        .btn-print {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="../image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">Back</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
     <div class="payslip">
         <h2>Payslip</h2>
         <p><strong>Employee:</strong> <?= htmlspecialchars($payslip['full_name']) ?></p>
@@ -66,4 +90,5 @@ if (!$payslip) {
         <p class="btn-print"><button onclick="window.print()">Print Payslip</button></p>
     </div>
 </body>
+
 </html>
