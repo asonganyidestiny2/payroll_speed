@@ -31,19 +31,22 @@ if (isset($_POST['add_employee'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Add Employee - SpeedNet Payroll</title>
     <link rel="stylesheet" href="../css/emp.css">
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
+        <div class="logo"><img src="image1_edited.png" alt=""></div>
+        <nav>
+            <?php
+            include '../module/components/nav.php';
+            ?>
+            <a href="../login.php" class="btn-login">BACK</a>
+        </nav>
+    </header>
     <div class="container">
         <h2>Add New Employee</h2>
         <?php if ($message): ?>
@@ -87,4 +90,5 @@ if (isset($_POST['add_employee'])) {
         </form>
     </div>
 </body>
+
 </html>
