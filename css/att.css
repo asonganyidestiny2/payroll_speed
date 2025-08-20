@@ -1,107 +1,188 @@
-body {
+/* Reset */
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #1e1e2d;
-    color: #fff;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* Page */
+:root{
+    --bg-dark: #1e1e2d;
+    --panel-dark: #2c2c3c;
+    --accent: #ff8a00;
+    --white: #ffffff;
+    --muted-border: #dcdcdc;
+    --success-bg: #d4edda;
+    --success-text: #155724;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-dark);
+    color: var(--white);
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Header */
 .main-header {
-    background: #2c2c3c;
-    color: white;
+    background: var(--bg-dark);
+    color: var(--white);
+    width: 100%;
     display: flex;
+    gap: 1rem;
+    padding: 10px 16px;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
     position: sticky;
-    z-index: 10000;
     top: 0;
+    z-index: 10000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.main-header .logo img {
+    height: 48px;
+    display: block;
 }
 
 .main-header .logo {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+/* Navigation */
+ nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .main-header nav a {
-    color: white;
-    margin-left: 15px;
+    color: var(--white);
+    margin-left: 0;
     text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background .15s ease;
 }
 
+.main-header nav a:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+/* Login button style */
 .btn-login {
-    background: orange;
+    background: var(--accent);
+    color: #fff;
     padding: 6px 12px;
-    border-radius: 4px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f7f9fc;
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
+.btn-login:hover {
+    filter: brightness(.95);
 }
 
+/* Title */
 h2 {
     text-align: center;
-    color: #660066;
-    margin-bottom: 20px;
+    color: var(--white);
+    margin: 18px 0;
+    font-size: 1.25rem;
 }
 
+/* Message */
 .message {
-    background-color: #d4edda;
-    color: #155724;
-    border-radius: 5px;
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border-radius: 6px;
     padding: 10px;
-    max-width: 600px;
-    margin: 15px auto;
+    max-width: 800px;
+    margin: 12px auto;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
 }
 
+/* Form panel */
 form {
-    background: white;
+    background: #fff;
+    color: #222;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    max-width: 900px;
+    margin: 12px auto;
 }
 
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-th,
-td {
+th, td {
     padding: 12px 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--muted-border);
     text-align: left;
 }
 
 th {
-    background-color: #660066;
-    color: white;
+    background: var(--panel-dark);
+    color: var(--white);
+    font-weight: 700;
 }
 
+/* Select */
 select {
-    padding: 6px;
-    border-radius: 5px;
+    padding: 6px 8px;
+    border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 0.95rem;
 }
 
-button {
+/* Button */
+button[type="submit"] {
     display: block;
     width: 100%;
-    background: #660066;
-    color: white;
+    background: var(--panel-dark);
+    color: var(--white);
     border: none;
     padding: 12px;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
+    transition: background .15s ease, transform .05s ease;
 }
 
-button:hover {
-    background: #4b004b;
+button[type="submit"]:hover {
+    background: #22232b;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+    body {
+        padding: 16px;
+    }
+    .main-header {
+        padding: 10px;
+        gap: .5rem;
+    }
+    form {
+        padding: 16px;
+    }
+    th, td {
+        padding: 10px 8px;
+    }
 }
