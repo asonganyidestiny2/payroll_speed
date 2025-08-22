@@ -78,7 +78,7 @@
                 $message = "<div class='message error'>Invalid email format.</div>";
             } else {
                 // Set recipient email
-                $to = "info@yourdomain.com"; // **IMPORTANT: CHANGE THIS TO YOUR ACTUAL EMAIL ADDRESS**
+                $to = "asonganyidestinysavior@gmail.com"; 
                 $headers = "From: " . $name . " <" . $email . ">\r\n";
                 $headers .= "Reply-To: " . $email . "\r\n";
                 $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
@@ -93,7 +93,7 @@
                 if (mail($to, $subject, $email_content, $headers)) {
                     $message = "<div class='message success'>Thank you for your message! We will get back to you soon.</div>";
                 } else {
-                    $message = "<div class='message error'>Oops! Something went wrong and we couldn't send your message.</div>";
+                    $message = "<div class='message error'>Oops! Something went wrong and we couldn't send your message, pleas check your internet connection and try again.</div>";
                 }
             }
         }
@@ -126,6 +126,6 @@
     <p>&copy; <?php echo date("Y"); ?> SpeedNet Payroll. All Rights Reserved.</p>
 </footer>
 
-<script src="index.js"></script>
+<script src="../script/index.js"></script>
 </body>
 </html>
