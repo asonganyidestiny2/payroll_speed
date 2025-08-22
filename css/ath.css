@@ -1,25 +1,77 @@
-.main-header {
-    background: #2c2c3c;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    position: sticky;
-    z-index: 10000;
-    top: 0;
-}
-.main-header .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-.main-header nav a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-}
-.btn-login {
-    background: orange;
-    padding: 6px 12px;
-    border-radius: 4px;
-}
+ body {
+     margin: 0;
+     font-family: Arial, sans-serif;
+     background: #1e1e2d;
+     color: #fff;
+ }
+
+ h2 {
+     text-align: center;
+     color: #1e1e2d;
+     margin-bottom: 20px;
+ }
+
+ form {
+     margin-bottom: 20px;
+     background: white;
+     padding: 15px 20px;
+     border-radius: 10px;
+     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+     display: flex;
+     gap: 15px;
+     justify-content: center;
+     flex-wrap: wrap;
+ }
+
+ select,
+ input[type="month"] {
+     padding: 8px;
+     border-radius: 6px;
+     border: 1px solid #ccc;
+     min-width: 180px;
+ }
+
+ button {
+     padding: 10px 25px;
+     background: #1e1e2d;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     font-size: 16px;
+ }
+
+ button:hover {
+     background: #1e1e2d;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     background: white;
+     border-radius: 10px;
+     overflow: hidden;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ th,
+ td {
+     padding: 12px 15px;
+     border-bottom: 1px solid #ddd;
+     text-align: left;
+ }
+
+ th {
+     background: #1e1e2d;
+     color: white;
+ }
+
+ tbody tr:hover {
+     background-color: #f0f0f0;
+ }
+
+ .no-records {
+     text-align: center;
+     padding: 30px 0;
+     color: #666;
+ }

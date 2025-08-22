@@ -42,87 +42,158 @@ $employees = $pdo->query("SELECT full_name FROM employees ORDER BY full_name ASC
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Leave Management - SpeedNet Payroll</title>
-<link rel="stylesheet" href="../css/leav.css">
-<style>
-    body { font-family: Arial, sans-serif; background: #eef2f7; margin:0; padding:0; }
-    .container { width: 90%; max-width: 1100px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow:0 3px 6px rgba(0,0,0,0.1); }
-    h1 { text-align: center; color: #333; }
-    form { margin-bottom: 20px; padding: 15px; background: #fafafa; border-radius: 6px; }
-    input, select, button { padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #ccc; border-radius: 4px; }
-    button { background: #2196F3; color: white; border: none; cursor: pointer; }
-    button:hover { background: #1976D2; }
-    table { width: 100%; border-collapse: collapse; background: #fff; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
-    th { background: #2196F3; color: white; }
-    .success { color: green; margin-bottom: 10px; }
-    .error { color: red; margin-bottom: 10px; }
-</style>
+    <meta charset="UTF-8">
+    <title>Leave Management - SpeedNet Payroll</title>
+    <link rel="stylesheet" href="../css/leav.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 6px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #2196F3;
+            color: white;
+        }
+
+        .success {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
 
-<div class="container">
-    <h1>Leave Management</h1>
+    <div class="container">
+        <h1>Leave Management</h1>
 
-    <?php if ($message) echo "<p class='success'>$message</p>"; ?>
-    <?php if ($error) echo "<p class='error'>$error</p>"; ?>
+        <?php if ($message)
+            echo "<p class='success'>$message</p>"; ?>
+        <?php if ($error)
+            echo "<p class='error'>$error</p>"; ?>
 
-    <form method="POST">
-        <input list="employees_list" name="employee_name" placeholder="Employee Name" required>
-        <datalist id="employees_list">
-            <?php foreach ($employees as $emp): ?>
-                <option value="<?php echo htmlspecialchars($emp); ?>"></option>
+        <form method="POST">
+            <input list="employees_list" name="employee_name" placeholder="Employee Name" required>
+            <datalist id="employees_list">
+                <?php foreach ($employees as $emp): ?>
+                    <option value="<?php echo htmlspecialchars($emp); ?>"></option>
+                <?php endforeach; ?>
+            </datalist>
+
+            <select name="leave_type" required>
+                <option value="">Select Leave Type</option>
+                <option value="Sick Leave">Sick Leave</option>
+                <option value="Casual Leave">Casual Leave</option>
+                <option value="Annual Leave">Annual Leave</option>
+            </select>
+
+            <label>Start Date</label>
+            <input type="date" name="start_date" required>
+
+            <label>End Date</label>
+            <input type="date" name="end_date" required>
+
+            <button type="submit">Submit Leave Request</button>
+        </form>
+
+        <h2>Leave Requests</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Employee Name</th>
+                <th>Leave Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+            </tr>
+            <?php foreach ($leaveRequests as $leave): ?>
+                <tr>
+                    <td><?php echo $leave['id']; ?></td>
+                    <td><?php echo htmlspecialchars($leave['employee_name']); ?></td>
+                    <td><?php echo htmlspecialchars($leave['leave_type']); ?></td>
+                    <td><?php echo $leave['start_date']; ?></td>
+                    <td><?php echo $leave['end_date']; ?></td>
+                    <td><?php echo $leave['status']; ?></td>
+                </tr>
             <?php endforeach; ?>
-        </datalist>
-
-        <select name="leave_type" required>
-            <option value="">Select Leave Type</option>
-            <option value="Sick Leave">Sick Leave</option>
-            <option value="Casual Leave">Casual Leave</option>
-            <option value="Annual Leave">Annual Leave</option>
-        </select>
-
-        <label>Start Date</label>
-        <input type="date" name="start_date" required>
-
-        <label>End Date</label>
-        <input type="date" name="end_date" required>
-
-        <button type="submit">Submit Leave Request</button>
-    </form>
-
-    <h2>Leave Requests</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Employee Name</th>
-            <th>Leave Type</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-        </tr>
-        <?php foreach ($leaveRequests as $leave): ?>
-        <tr>
-            <td><?php echo $leave['id']; ?></td>
-            <td><?php echo htmlspecialchars($leave['employee_name']); ?></td>
-            <td><?php echo htmlspecialchars($leave['leave_type']); ?></td>
-            <td><?php echo $leave['start_date']; ?></td>
-            <td><?php echo $leave['end_date']; ?></td>
-            <td><?php echo $leave['status']; ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
+        </table>
+    </div>
 
 </body>
+
 </html>

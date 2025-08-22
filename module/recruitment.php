@@ -54,13 +54,14 @@ $applicants = $pdo->query(query: "SELECT * FROM recruitments ORDER BY id")->fetc
 </head>
 <body>
     <header class="main-header">
-    <div class="logo"><img src="../image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">Back</a>
-    </nav>
-</header>
+        <div class="logo"><img src="../image1_edited.png" alt=""></div>
+        <?php
+        include '../module/components/nav.php';
+        ?>
+        <nav>
+            <a href="../login.php" class="btn-login">Back</a>
+        </nav>
+    </header>
 <div class="container">
     <h1>Recruitment Management</h1>
 
