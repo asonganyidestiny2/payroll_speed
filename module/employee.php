@@ -1,7 +1,5 @@
 <?php
-// Start the session at the very beginning
 session_start();
-// Include the database configuration file
 require '../config/db.php';
 
 // Initialize the message variable

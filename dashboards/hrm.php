@@ -55,7 +55,7 @@ try {
     <a href="../module/payroll.php">Payroll <i class="fi fi-ss-calculator"></i></a>
     <a href="../module/recruitment.php">Recruitment <i class="fi fi-ss-briefcase"></i></a>
     <a href="../module/report.php">Reports <i class="fi fi-ss-newspaper"></i></a>
-    <a href="../index.php">Home <i class="fi fi-ss-home"></i></a>
+    <a href="../indexes/index.php">Home <i class="fi fi-ss-home"></i></a>
 </nav>
 
 <div class="container">

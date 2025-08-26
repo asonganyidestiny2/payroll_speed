@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeedNet Payroll System</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-
 <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt="SpeedNet Logo"></div>
+    <div class="logo"><img src="../img/image1_edited.png" alt="SpeedNet Logo"></div>
     <nav class="main-nav">
         <a href="#hero">Home</a>
         <a href="#features">Features</a>
@@ -20,6 +19,9 @@
 </header>
 
 <main>
+    <h1>
+        welcome to speed net pay roll get started with our payroll.
+    </h1>
     <section id="hero" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Simplify Your Payroll.</h1>
@@ -27,7 +29,7 @@
             <a href="login.php" class="btn-cta">Get Started Now</a>
         </div>
         <div class="hero-image">
-            <img src="Screenshot_20250806-191947_edited.png" alt="Payroll dashboard screenshot">
+            <img src="../img/Screenshot_20250806-191947_edited.png" alt="Payroll dashboard screenshot">
         </div>
     </section>
 
@@ -59,7 +61,8 @@
 
     <section id="contact" class="contact-section">
         <h2 class="section-title">Get In Touch</h2>
-        <p class="contact-subtitle">Have questions or need a demo? Fill out the form below and we'll get back to you shortly.</p>
+        <p class="contact-subtitle">Have questions or need a demo? Fill out the form below and we'll get back to you shortly.
+        </p>
 
         <?php
         // PHP code to handle form submission

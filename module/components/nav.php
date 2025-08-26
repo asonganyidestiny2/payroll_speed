@@ -6,5 +6,6 @@
     <a href="../module/deduction.php">Deductions</a>
     <a href="../module/report.php">Reports</a>
     <a href="../module/payslip.php">Payslips</a>
+    <a href="../index.php">Home <i class="fi fi-ss-home"></i></a>
     <a href="setting.php">Settings</a>
 </nav>
