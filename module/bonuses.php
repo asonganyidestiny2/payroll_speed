@@ -15,7 +15,7 @@ $stmt = $pdo->prepare("SELECT id, full_name FROM employees WHERE status = 'activ
 $stmt->execute();
 $employees = $stmt->fetchAll();
 
-// Handle form submission
+// Handle form submission for individual bonus
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_bonus'])) {
     $employee_id = $_POST['employee_id'] ?? null;
     $bonus_type = trim($_POST['bonus_type'] ?? '');
@@ -31,6 +31,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_bonus'])) {
         } else {
             $message = "Failed to add bonus.";
         }
+    }
+}
+
+// Handle form submission for bulk bonus to all employees
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_bulk_bonus'])) {
+    $bonus_type = trim($_POST['bulk_bonus_type'] ?? '');
+    $amount = floatval($_POST['bulk_amount'] ?? 0);
+    $bonus_date = $_POST['bulk_bonus_date'] ?? date('Y-m-d');
+
+    if (!$bonus_type || $amount <= 0) {
+        $message = "Please fill all fields correctly for bulk bonus.";
+    } else {
+        $success_count = 0;
+        $error_count = 0;
+        
+        foreach ($employees as $employee) {
+            $stmt = $pdo->prepare("INSERT INTO bonuses (employee_id, bonus_type, amount, bonus_date) VALUES (?, ?, ?, ?)");
+            if ($stmt->execute([$employee['id'], $bonus_type, $amount, $bonus_date])) {
+                $success_count++;
+            } else {
+                $error_count++;
+            }
+        }
+        
+        $message = "Bulk bonus added: {$success_count} successful, {$error_count} failed.";
     }
 }
 
@@ -73,7 +98,7 @@ $bonuses = $stmt->fetchAll();
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Manage Bonuses</h2>
 
         <?php if ($message): ?>
-            <div class="<?= strpos($message, 'successfully') !== false ? 'bg-green-100 text-green-700 p-4 rounded mb-6' : 'bg-red-100 text-red-700 p-4 rounded mb-6' ?>">
+            <div class="<?= strpos($message, 'successfully') !== false || strpos($message, 'successful') !== false ? 'bg-green-100 text-green-700 p-4 rounded mb-6' : 'bg-red-100 text-red-700 p-4 rounded mb-6' ?>">
                 <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
@@ -109,6 +134,31 @@ $bonuses = $stmt->fetchAll();
 
                 <div class="input-group md:col-span-2">
                     <button type="submit" name="add_bonus" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Add Bonus</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Add Bulk Bonus Form -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Add Bonus to All Employees</h3>
+            <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                    <label for="bulk_bonus_type" class="block text-sm font-medium text-gray-700 mb-1">Bonus Type</label>
+                    <input type="text" name="bulk_bonus_type" id="bulk_bonus_type" placeholder="e.g., Performance, Holiday" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group">
+                    <label for="bulk_amount" class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                    <input type="number" step="0.01" min="0" name="bulk_amount" id="bulk_amount" placeholder="0.00" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group">
+                    <label for="bulk_bonus_date" class="block text-sm font-medium text-gray-700 mb-1">Bonus Date</label>
+                    <input type="date" name="bulk_bonus_date" id="bulk_bonus_date" value="<?= date('Y-m-d') ?>" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group md:col-span-2">
+                    <button type="submit" name="add_bulk_bonus" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition" onclick="return confirm('Are you sure you want to add this bonus to ALL employees?')">Add Bonus to All Employees</button>
                 </div>
             </form>
         </div>

@@ -15,7 +15,7 @@ $stmt = $pdo->prepare("SELECT id, full_name FROM employees WHERE status = 'activ
 $stmt->execute();
 $employees = $stmt->fetchAll();
 
-// Handle form submission
+// Handle form submission for individual deduction
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_deduction'])) {
     $employee_id = $_POST['employee_id'] ?? null;
     $type = trim($_POST['type'] ?? '');
@@ -31,6 +31,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_deduction'])) {
         } else {
             $message = "Failed to add deduction.";
         }
+    }
+}
+
+// Handle form submission for bulk deduction to all employees
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_bulk_deduction'])) {
+    $type = trim($_POST['bulk_type'] ?? '');
+    $amount = floatval($_POST['bulk_amount'] ?? 0);
+    $deduction_date = $_POST['bulk_deduction_date'] ?? date('Y-m-d');
+
+    if (!$type || $amount <= 0) {
+        $message = "Please fill all fields correctly for bulk deduction.";
+    } else {
+        $success_count = 0;
+        $error_count = 0;
+        
+        foreach ($employees as $employee) {
+            $stmt = $pdo->prepare("INSERT INTO deductions (employee_id, type, amount, deduction_date) VALUES (?, ?, ?, ?)");
+            if ($stmt->execute([$employee['id'], $type, $amount, $deduction_date])) {
+                $success_count++;
+            } else {
+                $error_count++;
+            }
+        }
+        
+        $message = "Bulk deduction added: {$success_count} successful, {$error_count} failed.";
     }
 }
 
@@ -72,7 +97,7 @@ $deductions = $stmt->fetchAll();
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Manage Deductions</h2>
 
         <?php if ($message): ?>
-            <div class="<?= strpos($message, 'successfully') !== false ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?> p-4 rounded mb-6">
+            <div class="<?= strpos($message, 'successfully') !== false || strpos($message, 'successful') !== false ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' ?> p-4 rounded mb-6">
                 <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
@@ -108,6 +133,31 @@ $deductions = $stmt->fetchAll();
 
                 <div class="input-group md:col-span-2">
                     <button type="submit" name="add_deduction" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Add Deduction</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Add Bulk Deduction Form -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Add Deduction to All Employees</h3>
+            <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                    <label for="bulk_type" class="block text-sm font-medium text-gray-700 mb-1">Deduction Type</label>
+                    <input type="text" name="bulk_type" id="bulk_type" placeholder="e.g., Tax, Loan" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group">
+                    <label for="bulk_amount" class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                    <input type="number" step="0.01" min="0" name="bulk_amount" id="bulk_amount" placeholder="0.00" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group">
+                    <label for="bulk_deduction_date" class="block text-sm font-medium text-gray-700 mb-1">Deduction Date</label>
+                    <input type="date" name="bulk_deduction_date" id="bulk_deduction_date" value="<?= date('Y-m-d') ?>" required class="w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="input-group md:col-span-2">
+                    <button type="submit" name="add_bulk_deduction" class="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition" onclick="return confirm('Are you sure you want to add this deduction to ALL employees?')">Add Deduction to All Employees</button>
                 </div>
             </form>
         </div>
