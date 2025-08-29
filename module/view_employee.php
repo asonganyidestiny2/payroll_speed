@@ -55,7 +55,7 @@ try {
                     <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
                 </svg>
             </button>
-                <?php include '../module/components/nav.php'; ?>
+            <?php include '../module/components/nav.php'; ?>
         </div>
     </header>
 
@@ -63,10 +63,12 @@ try {
         <h2 class="text-2xl font-bold mb-6">Employee List</h2>
 
         <?php if (isset($_GET['updated'])): ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">Employee updated successfully!</div>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">Employee updated
+                successfully!</div>
         <?php endif; ?>
         <?php if (isset($_GET['deleted'])): ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">Employee deleted successfully!</div>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">Employee deleted
+                successfully!</div>
         <?php endif; ?>
 
         <!-- Search Form -->
@@ -76,8 +78,11 @@ try {
                 <input type="text" name="search" class="flex-grow px-4 py-2 border border-gray-300 rounded-md"
                     placeholder="Search by name, email, or position..."
                     value="<?= htmlspecialchars($search_query ?? '') ?>">
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
-                <a href="view.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 text-center">Clear Search</a>
+                <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
+                <a href="view.php"
+                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 text-center">Clear
+                    Search</a>
             </form>
         </div>
 
@@ -87,15 +92,24 @@ try {
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Salary Type</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Base Salary</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Hired</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Full Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Position</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Salary Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Base Salary</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Date Hired</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -105,19 +119,23 @@ try {
                                     <td class="px-6 py-4 whitespace-nowrap"><?= htmlspecialchars($emp['full_name']) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= htmlspecialchars($emp['email']) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= htmlspecialchars($emp['position']) ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap"><?= htmlspecialchars(ucfirst($emp['salary_type'])) ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">FCFA<?= htmlspecialchars(number_format($emp['base_salary'], 2)) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <?= htmlspecialchars(ucfirst($emp['salary_type'])) ?></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        FCFA<?= htmlspecialchars(number_format($emp['base_salary'], 2)) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap"><?= htmlspecialchars($emp['date_hired']) ?></td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                             <?= $emp['status'] === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' ?>">
                                             <?= htmlspecialchars(ucfirst($emp['status'])) ?>
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="edit_employee.php?id=<?= $emp['id'] ?>" class="text-indigo-600 hover:text-indigo-900 mr-2">Edit</a>
+                                        <a href="edit_employee.php?id=<?= $emp['id'] ?>"
+                                            class="text-indigo-600 hover:text-indigo-900 mr-2">Edit</a>
                                         <span class="text-gray-400">|</span>
-                                        <a href="delete_employee.php?delete=<?= $emp['id'] ?>"
+                                        <a href="delete_employee.php?id=<?= $emp['id'] ?>"
                                             onclick="return confirm('Do you want to delete this employee?')"
                                             class="text-red-600 hover:text-red-900 ml-2">Delete</a>
                                     </td>
