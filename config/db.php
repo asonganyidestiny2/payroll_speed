@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'speednet_payroll';
+$db   = 'speed_db';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

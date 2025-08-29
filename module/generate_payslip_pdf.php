@@ -93,7 +93,7 @@ if ($paymentDate && $paymentDate != '0000-00-00') {
     $formattedDate = 'Pending';
 }
 
-// Create HTML content for the PDF
+//html content for pdf
 $html = '
 <style>
     .header { 
