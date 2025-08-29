@@ -49,127 +49,112 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $employee_id !== null) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance History - SpeedNet Payroll</title>
-    <link rel="stylesheet" href="../css/ath.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f9fc;
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        h2 {
-            text-align: center;
-            color: #660066;
-            margin-bottom: 20px;
-        }
-        form {
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        select, input[type="month"] {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            min-width: 180px;
-        }
-        button {
-            padding: 10px 25px;
-            background: #660066;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background: #4b004b;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        th, td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #660066;
-            color: white;
-        }
-        tbody tr:hover {
-            background-color: #f0f0f0;
-        }
-        .no-records {
-            text-align: center;
-            padding: 30px 0;
-            color: #666;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/modules/attendance_history.css">
 </head>
-<body>
+
+<body class="font-inter">
     <header class="main-header">
-    <div class="logo"><img src="image1_edited.png" alt=""></div>
-    <nav>
-        <a href="../index.php">Home</a>
-        <a href="#features">Features</a>
-        <a href="../login.php" class="btn-login">BACK</a>
-    </nav>
-</header>
-<h2>Attendance History</h2>
+        <div class="logo"><img src="../image1_edited.png" alt="Company Logo" class="w-32"></div>
+        <div class="dropdown">
+            <button id="dropdown-btn" class="dropdown-btn p-2 rounded hover:bg-gray-100">
+                <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                </svg>
+            </button>
+            <div id="dropdown-menu" class="dropdown-content">
+                <a href="../dashboard.php">Dashboard</a>
+                <a href="attendance.php">Attendance</a>
+                <a href="employees.php">Employees</a>
+                <a href="payroll.php">Payroll</a>
+                <a href="../logout.php">Logout</a>
+            </div>
+        </div>
+    </header>
 
-<form method="GET" action="">
-    <select name="employee_id" required>
-        <option value="all" <?= $employee_id === 'all' ? 'selected' : '' ?>>All Employees</option>
-        <?php foreach ($employees as $emp): ?>
-            <option value="<?= $emp['id'] ?>" <?= $employee_id == $emp['id'] ? 'selected' : '' ?>>
-                <?= htmlspecialchars($emp['full_name']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+    <main class="container mx-auto p-8 pt-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Attendance History</h2>
 
-    <input type="month" name="year_month" value="<?= htmlspecialchars($year_month) ?>" required>
+        <!-- Filter Form -->
+        <div class="card mb-8">
+            <form method="GET" action="" class="flex flex-col sm:flex-row gap-4 items-center">
+                <div class="flex-grow w-full">
+                    <label for="employee_id" class="block text-sm font-medium text-gray-700">Select Employee</label>
+                    <select name="employee_id" id="employee_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 px-3 py-2">
+                        <option value="all" <?= $employee_id === 'all' ? 'selected' : '' ?>>All Employees</option>
+                        <?php foreach ($employees as $emp): ?>
+                            <option value="<?= $emp['id'] ?>" <?= $employee_id == $emp['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($emp['full_name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="flex-grow w-full">
+                    <label for="year_month" class="block text-sm font-medium text-gray-700">Select Month</label>
+                    <input type="month" name="year_month" id="year_month" value="<?= htmlspecialchars($year_month) ?>" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 px-3 py-2">
+                </div>
+                <div class="w-full sm:w-auto mt-6">
+                    <button type="submit" class="btn-primary w-full">Filter</button>
+                </div>
+            </form>
+        </div>
 
-    <button type="submit">Filter</button>
-</form>
+        <!-- Attendance Records Table -->
+        <div class="card">
+            <?php if (!empty($attendanceRecords)): ?>
+                <div class="overflow-x-auto">
+                    <table class="striped-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Employee</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($attendanceRecords as $record): ?>
+                                <tr>
+                                    <td><?= date('F j, Y', strtotime($record['date'])) ?></td>
+                                    <td><?= htmlspecialchars($record['full_name']) ?></td>
+                                    <td><?= ucfirst($record['status']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <p class="no-records">No attendance records found for the selected filter.</p>
+            <?php endif; ?>
+        </div>
+    </main>
+    
+    <script>
+        // Dropdown Navigation Toggle
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdownBtn = document.getElementById('dropdown-btn');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const dropdownContainer = document.querySelector('.dropdown');
 
-<?php if (!empty($attendanceRecords)): ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Employee</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($attendanceRecords as $record): ?>
-                <tr>
-                    <td><?= date('F j, Y', strtotime($record['date'])) ?></td>
-                    <td><?= htmlspecialchars($record['full_name']) ?></td>
-                    <td><?= ucfirst($record['status']) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-    <p class="no-records">No attendance records found for the selected filter.</p>
-<?php endif; ?>
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownContainer.classList.toggle('open');
+            });
 
+            // Close the dropdown if the user clicks outside of it
+            document.addEventListener('click', (event) => {
+                if (!dropdownContainer.contains(event.target)) {
+                    dropdownContainer.classList.remove('open');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
